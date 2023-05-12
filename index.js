@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 app.use("/products", productsRoute)
 app.use(cors())
 
-app.get("/", (req, res) => {
+app.get("", (req, res) => {
     res.send("Hello User, how are doing!?")
 })
 

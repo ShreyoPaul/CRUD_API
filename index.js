@@ -4,8 +4,8 @@
 // const bodyParser = require("body-parser")
 // const  productsRoute  = require("./Routes/routes.js")
 
-import dotenv from 'dotenv'
-dotenv.config({ path: './.env' })
+// import dotenv from 'dotenv'
+// dotenv.config({ path: './.env' })
 
 import express from 'express'
 import bodyParser from 'body-parser'

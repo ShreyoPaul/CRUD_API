@@ -18,15 +18,12 @@ const app = express()
 
 const PORT = process.env.PORT || 5000
 
+app.use(bodyParser.json())
+app.use("/products", productsRoute)
+app.use(cors())
+
 app.get("/", (req, res) => {
     res.send("Hello User, how are doing!?")
 })
-
-app.use(bodyParser.json())
-app.use("/products", productsRoute)
-
-
-
-
 
 app.listen(PORT, () => console.log("Server is running on port", PORT))

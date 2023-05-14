@@ -1,12 +1,14 @@
 import dotenv from 'dotenv'
 dotenv.config({ path: './.env' })
 
+
 import { userSchema } from "../DB/Models/userSchema.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 
 export const signUp = async (req, res) => {
-    const { name, email, password } = req.body
+    const { name, email, password ,role } = req.body
+    console.log(req)
     try {
         const existingUserCheck = await userSchema.findOne({ email })
         if (existingUserCheck) {
@@ -19,14 +21,15 @@ export const signUp = async (req, res) => {
         const createdUser = new userSchema({
             name,
             email,
-            password: hashPassword
+            password: hashPassword,
+            role
         })
 
         const signUpUser = async (createdUser) => {
 
             const result = await createdUser.save()
             const token = jwt.sign({ email, id: result._id }, process.env.JWT_SECRET_KEY)
-            res.status(201).json({ message: "Sign up completed!", token, user: result })
+            res.status(201).json({ message: "Sign up successful!", token, user: result })
         }
 
         signUpUser(createdUser)
@@ -51,7 +54,7 @@ export const signIn = async (req, res) => {
         }
 
         const token = jwt.sign({ email, id: existingUserCheck._id }, process.env.JWT_SECRET_KEY)
-        res.status(201).json({ message: "Sign in completed!", token, user: existingUserCheck })
+        res.status(201).json({ message: "Sign in successful!", token, user: existingUserCheck })
 
     } catch (error) {
         console.log(error)

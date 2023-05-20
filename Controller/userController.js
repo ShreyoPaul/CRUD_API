@@ -7,7 +7,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 
 export const signUp = async (req, res) => {
-    const { name, email, password ,role } = req.body
+    const { name, email, password ,role, user_id } = req.body
     console.log(req)
     try {
         const existingUserCheck = await userSchema.findOne({ email })
@@ -22,7 +22,8 @@ export const signUp = async (req, res) => {
             name,
             email,
             password: hashPassword,
-            role
+            role,
+            user_id
         })
 
         const signUpUser = async (createdUser) => {

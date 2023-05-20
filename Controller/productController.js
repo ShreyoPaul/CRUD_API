@@ -72,7 +72,7 @@ export const updateProduct = (req, res) => {
 
         try {
             console.log(productInfo.name)
-            const result = await productSchema.updateMany({ _id }, {
+            const result = await productSchema.updateOne({ _id }, {
                 $set: {
                     name: productInfo.name,
                     price: productInfo.price,
@@ -102,7 +102,7 @@ export const deleteProduct = (req, res) => {
             const result = await productSchema.deleteOne({ _id })
 
             console.log(result)
-            if (result) return res.status(201).json({ data: result })
+            if (result) return res.status(201).json({ message: "Product is successfully deleted!" })
         } catch (error) {
             console.log(error)
             return res.status(500).json({ message: "ERROR occured. Server is not working!" })

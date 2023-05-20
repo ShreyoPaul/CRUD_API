@@ -16,6 +16,10 @@ const user = mongoose.Schema({
     role: {
         type : String,
         require: true
+    },
+    user_id: {
+        type : Number,
+        require: true
     }
 })
 
